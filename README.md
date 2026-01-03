@@ -81,34 +81,25 @@ Coursework_Maria/
   - ``fname`` - имя файла для сохранения
   - ``count`` - количество записей в массиве
 - **Возвращает**: **1** в случае успеха, **0** в случае ошибки
-
-### 6. `int search_platform_physics_count(Engine* database, int count, char* search_platform, char search_physics)`
-- **Назначение**: Подсчитывает количество записей, удовлетворяющих критериям поиска
-- **Параметры**: 
-  - ``database`` - указатель на массив структур
-  - ``count`` - количество записей в массиве
-  - ``search_platform`` - целевая платформа дял поиска
-  - ``search_physics`` - нужная поддержка физики
-- **Возвращает**: количество найденных записей
-
-### 7. `Engine* search_platform_physics_array(Engine* database, int count, char* search_platform, char search_physics, int search_strings)`
+  
+### 6. `Engine* search_platform_physics(Engine* database, int count, char* search_platform, char search_physics, int* search_count);`
 - **Назначение**: Находит все записи, удовлетворяющие критериям поиска, и записывает их в новый массив
 - **Параметры**: 
   - ``database`` - указатель на массив структур
   - ``count`` - количество записей в массиве
   - ``search_platform`` - целевая платформа дял поиска
   - ``search_physics`` - нужная поддержка физики
-  - ``search_strings`` - количество найденных записей
+  - ``search_count`` - указатель на количество найденных записей
 - **Возвращает**: указатель на новый массив с найденными записями
 
-### 8. `int compare(const void* a, const void* b)`
+### 7. `int compare(const void* a, const void* b)`
 - **Назначение**: Функция сравнения для сортировки qsort()
 - **Параметры**: 
   - ``a`` - указатель на первый сравниваемый элемент
   - ``b`` - указатель на второй сравниваемый элемент
 - **Возвращает**: **-1**, если ``a`` < ``b``;  **1**, если ``a`` > ``b``;  **0**, если ``a`` = ``b``
 
-### 9. `int sort_fps_in_the_square(Engine* database, int count, int (*compare) (const void*, const void*))`
+### 8. `int sort_fps_in_the_square(Engine* database, int count, int (*compare) (const void*, const void*))`
 - **Назначение**: Сортирует массив по квадратному корню из FPS
 - **Параметры**: 
   - ``database`` - указатель на массив структур
@@ -116,7 +107,7 @@ Coursework_Maria/
   - ``compare`` - указатель на функцию сравнения
 - **Возвращает**: **1** при успешном выполнении, **0** при ошибке
 
-### 10. `Engine* test(Engine* database, int last_count, int count)`
+### 9. `Engine* test(Engine* database, int last_count, int count)`
 - **Назначение**: Генерирует тестовые значения
 - **Параметры**: 
   - ``database`` - указатель на массив структур
