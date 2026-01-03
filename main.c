@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
 #include <stdlib.h>
@@ -11,22 +11,22 @@
 int main()
 {
 	setlocale(LC_ALL, "RUS");
-	puts("=============== База данных AR/VR движков ===============");
-	puts("Выполнила: Филичкина Мария бТИИ-251");
+	puts("=============== Р‘Р°Р·Р° РґР°РЅРЅС‹С… AR/VR РґРІРёР¶РєРѕРІ ===============");
+	puts("Р’С‹РїРѕР»РЅРёР»Р°: Р¤РёР»РёС‡РєРёРЅР° РњР°СЂРёСЏ Р±РўРР-251");
 	Engine* database = NULL;
 	int count = 0;
 	while (1) {
 		int operation;
-		puts("Меню:");
-		puts("1. Загрузка данных из файла");
-		puts("2. Просмотр всех записей");
-		puts("3. Поиск по платформе и физике");
-		puts("4. Сортировка данных по квадратному корню из FPS");
-		puts("5. Добавление новой записи");
-		puts("6. Сохранение данных в файл");
-		puts("7. Генерация тестовых значений");
-		puts("0. Выход");
-		printf("Введите номер операции:");
+		puts("РњРµРЅСЋ:");
+		puts("1. Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°");
+		puts("2. РџСЂРѕСЃРјРѕС‚СЂ РІСЃРµС… Р·Р°РїРёСЃРµР№");
+		puts("3. РџРѕРёСЃРє РїРѕ РїР»Р°С‚С„РѕСЂРјРµ Рё С„РёР·РёРєРµ");
+		puts("4. РЎРѕСЂС‚РёСЂРѕРІРєР° РґР°РЅРЅС‹С… РїРѕ РєРІР°РґСЂР°С‚РЅРѕРјСѓ РєРѕСЂРЅСЋ РёР· FPS");
+		puts("5. Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё");
+		puts("6. РЎРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»");
+		puts("7. Р“РµРЅРµСЂР°С†РёСЏ С‚РµСЃС‚РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№");
+		puts("0. Р’С‹С…РѕРґ");
+		printf("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РѕРїРµСЂР°С†РёРё:");
 		scanf("%d", &operation);
 		getchar();
 
@@ -34,45 +34,45 @@ int main()
 		{
 		case 1:
 			puts("---------------------------------------------");
-			puts("Загрузка данных из файла");
+			puts("Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°");
 			char file_name[30];
-			printf("Введите имя файла ");
+			printf("Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° ");
 			fgets(file_name, sizeof(file_name), stdin);
 			file_name[strcspn(file_name, "\n")] = 0;
 			count = count_data(file_name);
 			database = uploading_data(file_name, count, database);
-			printf("Загружено %d записей\n", count);
+			printf("Р—Р°РіСЂСѓР¶РµРЅРѕ %d Р·Р°РїРёСЃРµР№\n", count);
 			break;
 		case 2:
 			puts("---------------------------------------------");
-			puts("Просмотр всех записей");
+			puts("РџСЂРѕСЃРјРѕС‚СЂ РІСЃРµС… Р·Р°РїРёСЃРµР№");
 			output_engine(database, count);
 			break;
 		case 3:
 			puts("---------------------------------------------");
-			puts("Поиск по платформе и физике");
+			puts("РџРѕРёСЃРє РїРѕ РїР»Р°С‚С„РѕСЂРјРµ Рё С„РёР·РёРєРµ");
 			char search_platform[100];
 			char search_physics;
-			puts("Введите платформу для поиска");
+			puts("Р’РІРµРґРёС‚Рµ РїР»Р°С‚С„РѕСЂРјСѓ РґР»СЏ РїРѕРёСЃРєР°");
 			fgets(search_platform, sizeof(search_platform), stdin);
 			search_platform[strcspn(search_platform, "\n")] = 0;
-			puts("Введите поддержку физики для поиска");
+			puts("Р’РІРµРґРёС‚Рµ РїРѕРґРґРµСЂР¶РєСѓ С„РёР·РёРєРё РґР»СЏ РїРѕРёСЃРєР°");
 			scanf("%c", &search_physics);
 			getchar();
-			int search_count = search_platform_physics_count(database, count, search_platform, search_physics);
-			Engine* search_array = search_platform_physics_array(database, count, search_platform, search_physics, search_count);
-			if (search_array == NULL)
+			int search_count;
+			Engine* search_array = search_platform_physics(database, count, search_platform, search_physics, &search_count);
+			if (search_array == NULL || search_count == 0)
 			{
-				printf("Записей не найдено\n");
+				printf("Р—Р°РїРёСЃРµР№ РЅРµ РЅР°Р№РґРµРЅРѕ\n");
 				break;
 			}
-			printf("=============== Найдено %d записей =================\n", search_count);
+			printf("=============== РќР°Р№РґРµРЅРѕ %d Р·Р°РїРёСЃРµР№ =================\n", search_count);
 			output_engine(search_array, search_count);
 			free(search_array);
 			break;
 		case 4:
 			puts("---------------------------------------------");
-			puts("Сортировка данных по квадратному корню из FPS");
+			puts("РЎРѕСЂС‚РёСЂРѕРІРєР° РґР°РЅРЅС‹С… РїРѕ РєРІР°РґСЂР°С‚РЅРѕРјСѓ РєРѕСЂРЅСЋ РёР· FPS");
 			if (sort_fps_in_the_square(database, count, compare))
 			{
 				output_engine(database, count);
@@ -80,28 +80,28 @@ int main()
 			break;
 		case 5:
 			puts("---------------------------------------------");
-			puts("Добавление новой записи:");
+			puts("Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё:");
 			count += 1;
 			database = input_engine(database, count);
-			puts("Запись успешно добавлена");
+			puts("Р—Р°РїРёСЃСЊ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅР°");
 			break;
 		case 6:
 			puts("---------------------------------------------");
-			puts("Сохранение данных в файл");
+			puts("РЎРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»");
 			char fname[30];
-			printf("Введите имя файла для сохранения\n");
+			printf("Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ\n");
 			fgets(fname, sizeof(fname), stdin);
 			fname[strcspn(fname, "\n")] = 0;
 			if (saving_data(database, fname, count))
 			{
-				printf("Сохранено %d записей\n", count);
+				printf("РЎРѕС…СЂР°РЅРµРЅРѕ %d Р·Р°РїРёСЃРµР№\n", count);
 			}
 			break;
 		case 7:
 			puts("---------------------------------------------");
-			puts("Генерация тестовых значений");
+			puts("Р“РµРЅРµСЂР°С†РёСЏ С‚РµСЃС‚РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№");
 			int count_for_test;
-			puts("Введите количество записей");
+			puts("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃРµР№");
 			scanf("%d", &count_for_test);
 			int last_count = count;
 			count += count_for_test;
@@ -111,7 +111,7 @@ int main()
 			break;
 		case 0:
 			free(database);
-			puts("Выход из программы...");
+			puts("Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 			return 0;
 		}
 	}

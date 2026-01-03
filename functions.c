@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
 #include <stdlib.h>
@@ -15,7 +15,7 @@ int count_data(const char* file_name)
 	out = fopen(file_name, "rb");
 	if (out == NULL)
 	{
-		printf("Ошибка открытия файла для записи\n");
+		printf("РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё\n");
 		return 0;
 	}
 
@@ -37,13 +37,13 @@ Engine* uploading_data(const char* file_name, int count, Engine* database)
 	out = fopen(file_name, "rb");
 	if (out == NULL)
 	{
-		printf("Ошибка открытия файла для чтения\n");
+		printf("РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РґР»СЏ С‡С‚РµРЅРёСЏ\n");
 		return 0;
 	}
 
 	if (count <= 0)
 	{
-		printf("Файл пуст\n");
+		printf("Р¤Р°Р№Р» РїСѓСЃС‚\n");
 		fclose(out);
 		return 0;
 	}
@@ -52,7 +52,7 @@ Engine* uploading_data(const char* file_name, int count, Engine* database)
 	database = (Engine*)malloc(count * sizeof(Engine));
 	if (database == NULL)
 	{
-		printf("Ошибка выделения памяти!\n");
+		printf("РћС€РёР±РєР° РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё!\n");
 		fclose(out);
 		return 0;
 	}
@@ -76,28 +76,28 @@ int output_engine(Engine* database, int count)
 {
 	for (int i = 0; i < count; i++)
 	{
-		printf("========= Движок %d ===========\n", i + 1);
-		printf("Название: %s\n", database[i].name);
-		printf("Целевая платформа: %s\n", database[i].target_platform);
-		printf("Стабильный FPS: %f\n", database[i].stable_fps);
-		printf("Поддержка физики: %s\n", database[i].physics_support == '+' ? "Да" : "Нет");
+		printf("========= Р”РІРёР¶РѕРє %d ===========\n", i + 1);
+		printf("РќР°Р·РІР°РЅРёРµ: %s\n", database[i].name);
+		printf("Р¦РµР»РµРІР°СЏ РїР»Р°С‚С„РѕСЂРјР°: %s\n", database[i].target_platform);
+		printf("РЎС‚Р°Р±РёР»СЊРЅС‹Р№ FPS: %f\n", database[i].stable_fps);
+		printf("РџРѕРґРґРµСЂР¶РєР° С„РёР·РёРєРё: %s\n", database[i].physics_support == '+' ? "Р”Р°" : "РќРµС‚");
 
 		char quality_str[20];
 		switch (database[i].graphics_quality) {
 		case LOW:
-			strcpy(quality_str, "Низкое");
+			strcpy(quality_str, "РќРёР·РєРѕРµ");
 			break;
 		case MEDIUM:
-			strcpy(quality_str, "Среднее");
+			strcpy(quality_str, "РЎСЂРµРґРЅРµРµ");
 			break;
 		case HIGH:
-			strcpy(quality_str, "Высокое");
+			strcpy(quality_str, "Р’С‹СЃРѕРєРѕРµ");
 			break;
 		}
 
-		printf("Качество графики: %s\n", quality_str);
-		printf("Размер SDK: %f ГБ\n", database[i].size_sdk);
-		printf("Стоимость лицензии: %lf\n", database[i].license_cost);
+		printf("РљР°С‡РµСЃС‚РІРѕ РіСЂР°С„РёРєРё: %s\n", quality_str);
+		printf("Р Р°Р·РјРµСЂ SDK: %f Р“Р‘\n", database[i].size_sdk);
+		printf("РЎС‚РѕРёРјРѕСЃС‚СЊ Р»РёС†РµРЅР·РёРё: %lf\n", database[i].license_cost);
 		puts("------------------------------------------------");
 	}
 	return 1;
@@ -108,29 +108,29 @@ Engine* input_engine(Engine* database, int count)
 	database = (Engine*)realloc(database, count * sizeof(Engine));
 	if (database == NULL)
 	{
-		puts("Ошибка выделения памяти");
+		puts("РћС€РёР±РєР° РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё");
 		return 0;
 	}
-	printf("Запись %d\n", count);
-	puts("Введите название:");
+	printf("Р—Р°РїРёСЃСЊ %d\n", count);
+	puts("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ:");
 	fgets(database[count - 1].name, sizeof(database[count - 1].name), stdin);
 	database[count - 1].name[strcspn(database[count - 1].name, "\n")] = 0;
 
 
-	puts("Введите целевую платформу:");
+	puts("Р’РІРµРґРёС‚Рµ С†РµР»РµРІСѓСЋ РїР»Р°С‚С„РѕСЂРјСѓ:");
 	fgets(database[count - 1].target_platform, sizeof(database[count - 1].target_platform), stdin);
 	database[count - 1].target_platform[strcspn(database[count - 1].target_platform, "\n")] = 0;
 
-	puts("Введите стабильный FPS:");
+	puts("Р’РІРµРґРёС‚Рµ СЃС‚Р°Р±РёР»СЊРЅС‹Р№ FPS:");
 	scanf("%f", &database[count - 1].stable_fps);
 	getchar();
 
-	puts("Поддержка физики ('+' - да, '-' - нет):");
+	puts("РџРѕРґРґРµСЂР¶РєР° С„РёР·РёРєРё ('+' - РґР°, '-' - РЅРµС‚):");
 	scanf(" %c", &database[count - 1].physics_support);
 
 
 	int graphics;
-	puts("Введите качество графики (1 - Низкое /2 - Среднее /3 - Высокое):");
+	puts("Р’РІРµРґРёС‚Рµ РєР°С‡РµСЃС‚РІРѕ РіСЂР°С„РёРєРё (1 - РќРёР·РєРѕРµ /2 - РЎСЂРµРґРЅРµРµ /3 - Р’С‹СЃРѕРєРѕРµ):");
 	scanf("%d", &graphics);
 	if (graphics < 1 || graphics > 3) {
 		graphics = 0;
@@ -138,11 +138,11 @@ Engine* input_engine(Engine* database, int count)
 	database[count - 1].graphics_quality = (Graphics_Quality)graphics;
 
 
-	puts("Введите размер SDK:");
+	puts("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ SDK:");
 	scanf("%f", &database[count - 1].size_sdk);
 
 
-	puts("Введите стоимость лицензии:");
+	puts("Р’РІРµРґРёС‚Рµ СЃС‚РѕРёРјРѕСЃС‚СЊ Р»РёС†РµРЅР·РёРё:");
 	scanf("%lf", &database[count - 1].license_cost);
 	getchar();
 	puts("-----------------------------------------------------------");
@@ -154,7 +154,7 @@ int saving_data(Engine* database, const char* fname, int count)
 {
 	if (count == 0)
 	{
-		puts("База данных пуста");
+		puts("Р‘Р°Р·Р° РґР°РЅРЅС‹С… РїСѓСЃС‚Р°");
 		return 0;
 	}
 
@@ -162,7 +162,7 @@ int saving_data(Engine* database, const char* fname, int count)
 	out = fopen(fname, "wb");
 	if (out == NULL)
 	{
-		printf("Ошибка открытия файла для записи\n");
+		printf("РћС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё\n");
 		return 0;
 	}
 
@@ -181,7 +181,7 @@ int saving_data(Engine* database, const char* fname, int count)
 }
 
 
-int search_platform_physics_count(Engine* database, int count, char* search_platform, char search_physics)
+Engine* search_platform_physics(Engine* database, int count, char* search_platform, char search_physics, int* search_count)
 {
 	int search_strings = 0;
 	for (int i = 0; i < count; i++)
@@ -191,11 +191,7 @@ int search_platform_physics_count(Engine* database, int count, char* search_plat
 			search_strings += 1;
 		}
 	}
-	return search_strings;
-}
-
-Engine* search_platform_physics_array(Engine* database, int count, char* search_platform, char search_physics, int search_strings)
-{
+	*search_count = search_strings;
 	if (search_strings == 0)
 	{
 		return NULL;
@@ -203,7 +199,7 @@ Engine* search_platform_physics_array(Engine* database, int count, char* search_
 	Engine* search_records = (Engine*)malloc(search_strings * sizeof(Engine));
 	if (search_records == NULL)
 	{
-		puts("Ошибка выделения памяти");
+		puts("РћС€РёР±РєР° РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё");
 		return NULL;
 	}
 	int index = 0;
@@ -263,7 +259,7 @@ int sort_fps_in_the_square(Engine* database, int count, int (*compare)(const voi
 {
 	if (count <= 0 || database == NULL)
 	{
-		puts("База данный пуста. Загрузите данные");
+		puts("Р‘Р°Р·Р° РґР°РЅРЅС‹Р№ РїСѓСЃС‚Р°. Р—Р°РіСЂСѓР·РёС‚Рµ РґР°РЅРЅС‹Рµ");
 		return 0;
 	}
 	qsort(database, count, sizeof(Engine), compare);
