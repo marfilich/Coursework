@@ -249,7 +249,7 @@ Engine* test(Engine* database, int last_count, int count)
 		database[i].stable_fps = 10 + rand() % 110;
 		database[i].physics_support = physics_support[rand() % 2];
 		database[i].graphics_quality = 1 + rand() % 3;
-		database[i].size_sdk = 10 + rand() % 490 / 10.0f;
+		database[i].size_sdk = 10 + rand() % 490 / 10.0;
 		database[i].license_cost = rand() % 10000;
 	}
 	return database;
@@ -264,4 +264,5 @@ int sort_fps_in_the_square(Engine* database, int count, int (*compare)(const voi
 	}
 	qsort(database, count, sizeof(Engine), compare);
 	return 1;
+
 }
